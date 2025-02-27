@@ -1,0 +1,3 @@
+location ~* ^/zh-CN/scripts(.*)$ {
+    rewrite ^/zh-CN/scripts(.*)$ /scriptRoute.php?route=$1$is_args$args last;
+}
