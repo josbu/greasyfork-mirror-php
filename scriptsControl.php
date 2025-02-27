@@ -49,9 +49,7 @@ if (file_exists($file_name)) {
         $redirect_url = str_ireplace($originUrl, $mirrorUrl, $redirect_url);
         header("Location: " . $redirect_url);
         exit();
-    } elseif ($httpCode >= 400) {
-        $body =  "异常请求：" . $httpCode;
-    } else {
+    }else {
         $html = $response;
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
         $html = str_ireplace($originUrl, $mirrorUrl, $html);
