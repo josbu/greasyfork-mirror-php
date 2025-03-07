@@ -78,6 +78,19 @@
         let titlle = document.querySelector('#site-name-text')
         titlle.addEventListener('click',()=>{location.href='/zh-CN'})
         titlle.style.cursor='pointer'
+        let r = setInterval(()=>{
+        let sidebar = document.querySelector(".open-sidebar")
+        if(sidebar){
+          clearInterval(r)
+          let nav = document.querySelector('.sidebar')
+          sidebar.addEventListener('click', () => {
+            nav.style.display = 'block'
+          })
+          document.querySelector('.close-sidebar').addEventListener('click',()=>{
+            nav.style.display = 'none'
+          })
+        }
+      },100)
       </script>
     </div>
   </header>
