@@ -51,12 +51,12 @@ if (file_exists($file_name)) {
         exit();
     }else {
         $html = $response;
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
         $html = str_ireplace($originUrl, $mirrorUrl, $html);
         $html = str_ireplace($originUpdateUrl, $replaceUpdateUrl, $html);
+
         $doc = new DOMDocument('1.0', 'UTF-8');
         libxml_use_internal_errors(true); // 禁止输出警告，避免加载无效HTML时报错
-        $doc->loadHTML($html);
+        $doc->loadHTML('<?xml encoding="UTF-8">' . $html); // 强制指定 UTF-8 编码
         // 创建DOMXPath实例
         $xpath = new DOMXPath($doc);
         // 查找 .width-constraint 元素
