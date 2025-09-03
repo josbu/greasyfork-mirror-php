@@ -4,3 +4,6 @@ location ~* ^/zh-CN/scripts(.*)$ {
     }
     rewrite ^/zh-CN/scripts(.*)$ /scriptRoute.php?route=$1$is_args$args last;
 }
+location ^~ /en/ {
+    rewrite ^/en/(.*)$ /zh-CN/$1$is_args$query_string last;
+}
