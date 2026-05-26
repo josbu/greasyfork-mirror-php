@@ -1,3 +1,13 @@
+# 模拟 Greasyfork 源站对脚本代码请求的 301 重定向
+# /scripts/{id}-{slug}/code/{filename}?version={ver}
+#   -> https://update.greasyfork.icu/scripts/{id}/{ver}/{filename}
+location ~* ^/(?:zh-CN/|en/)?scripts/(\d+)[^/]*/code/([^/?]+)$ {
+  if ($arg_version) {
+      return 301 https://update.greasyfork.icu/scripts/$1/$arg_version/$2;
+  }
+  # 没带 version 时，源站会重定向到最新版本号，这里简单转发到源站让它告诉我们最新版
+  return 302 https://greasyfork.org$request_uri;
+}
 location ~* ^/zh-CN/scripts(.*)$ {
     if ($request_uri ~* "^/clear\.php") {
         break;
